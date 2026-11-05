@@ -1,85 +1,81 @@
 # Đồ án thực tế Khoa học dữ liệu – Nhóm 02
 
-**Tên đăng ký:** Phân tích dữ liệu đơn hàng và dự đoán nguy cơ giao hàng trễ trong thương mại điện tử.
+**Tên đăng ký chính thức:** Phân tích dữ liệu đơn hàng và dự đoán nguy cơ giao hàng trễ trong thương mại điện tử.
 
-**Bộ dữ liệu nghiên cứu:** [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (Brazil, 2016–2018). **Hạn hoàn tất nội bộ: 30/11/2026.**
+**Nguồn dữ liệu:** [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), Brazil 2016–2018. **Hạn hoàn tất nội bộ:** 30/11/2026.
 
-> Trạng thái: cấu trúc khởi tạo; chưa có dữ liệu tải về, mô hình đã huấn luyện, kết quả thực nghiệm hoặc dự báo sản xuất. Không trình bày ví dụ chưa kiểm chứng thành kết quả đồ án.
+**Trạng thái:** Bộ khung gồm **5 notebook cá nhân + 1 notebook FINAL**, tài liệu lý thuyết Markdown, kiểm tra dữ liệu, notebook mô hình và đánh giá. Chưa có dữ liệu hoặc điểm số thực nghiệm Olist cho tới khi nhóm chạy thực tế.
 
-## Phân công theo đề cương đã chốt
+## Phân công và notebook
 
-| Thành viên | Chương | Phạm vi |
-|---|---|---|
-| **Tấn Lên (nhóm trưởng)** | 1, 6, phụ lục | Phát biểu bài toán, Dashboard Streamlit, kết luận, tích hợp và bảo vệ |
-| **Ngọc Lan** | 2 | Logistics, EDA, Random Forest, MLP, độ đo, nghiên cứu liên quan |
-| **Lam Linh** | 3 | Nguồn dữ liệu, ghép 9 CSV, nhãn, EDA, kiểm toán rò rỉ dữ liệu |
-| **Trúc Chi** | 4 | Chia theo thời gian, pipeline, Dummy, Random Forest, MLP, chọn ngưỡng |
-| **Vĩnh Chi** | 5 | Test metrics, PR curve, phân tích lỗi, đánh giá Top-K, hạn chế |
+| Thành viên | Nội dung báo cáo | Notebook | Lý thuyết Markdown |
+|---|---|---|---|
+| **Tấn Lên** | Chương 1, Chương 6, phụ lục và tích hợp | [01_TAN_LEN](notebooks/01_TAN_LEN_chuong_1_6.ipynb) | [Lý thuyết Ch1/6](docs/theory/01_tan_len_ch1_ch6.md) |
+| **Ngọc Lan** | Chương 2: cơ sở lý thuyết | [02_NGOC_LAN](notebooks/02_NGOC_LAN_chuong_2.ipynb) | [Lý thuyết Ch2](docs/theory/02_ngoc_lan_ch2.md) |
+| **Lam Linh** | Chương 3: dữ liệu, EDA, feature | [03_LAM_LINH](notebooks/03_LAM_LINH_chuong_3.ipynb) | [Lý thuyết Ch3](docs/theory/03_lam_linh_ch3.md) |
+| **Trúc Chi** | Chương 4: Dummy, RF, MLP và tuning | [04_TRUC_CHI](notebooks/04_TRUC_CHI_chuong_4.ipynb) | [Lý thuyết Ch4](docs/theory/04_truc_chi_ch4.md) |
+| **Vĩnh Chi** | Chương 5: đánh giá, error analysis | [05_VINH_CHI](notebooks/05_VINH_CHI_chuong_5.ipynb) | [Lý thuyết Ch5](docs/theory/05_vinh_chi_ch5.md) |
+| **Cả nhóm – Tấn Lên tích hợp** | Tổng hợp toàn bộ đồ án sau khi hoàn thành | [06_FINAL](notebooks/06_FINAL_tong_hop_do_an.ipynb) | [Hướng dẫn final](docs/theory/06_final_integration.md) |
 
-Đề cương: **6 chương / 26 tiểu mục + 1 phụ lục (27 hạng mục)**. Xem [đề cương chi tiết](docs/REPORT_OUTLINE.md) và [kế hoạch giao việc](docs/PLAN_NOV2026.md).
+[Hướng dẫn chi tiết từng notebook](docs/NOTEBOOK_GUIDE.md) · [Đề cương 6 chương / 27 hạng mục](docs/REPORT_OUTLINE.md) · [Kế hoạch tháng 11](docs/PLAN_NOV2026.md).
 
-[Bảng Google Sheets quản lý nhóm](https://docs.google.com/spreadsheets/d/1bbsNPpLUnJDNtUY-1TLw942ftK-fQfL8t-_j4jZkywY/edit) là nơi cập nhật tiến độ; GitHub lưu code, tài liệu kỹ thuật, Issues và Pull Requests.
-
-## Sơ đồ thư mục
+## Quy trình triển khai
 
 ```text
-Do_An_Khoa_hoc_du_lieu---GR02/
-├── .github/                  # Template cho Issue và Pull Request
-├── app/                      # Streamlit: Chương 6
-├── config/                   # Quy ước cấu hình môi trường
-├── data/
-│   ├── raw/                  # 9 CSV Olist (không push)
-│   └── processed/            # Dataset 1 hàng/order_id (không push)
-├── docs/                     # Quy ước, hợp đồng dữ liệu, kế hoạch, đề cương
-├── models/                   # Model artifacts, tài liệu (model nhị phân không push)
-├── notebooks/
-│   ├── 01_data_audit.ipynb
-│   ├── 02_prepare_orders.ipynb
-│   ├── 03_eda.ipynb
-│   ├── 04_train_models.ipynb
-│   └── 05_evaluate_models.ipynb
-├── reports/
-│   ├── chapters/             # Chương 1–6, phụ lục
-│   ├── figures/              # Hình báo cáo có thể tái lập
-│   └── tables/               # Bảng báo cáo có thể tái lập
-├── src/                      # Hàm dùng chung, test được
-├── tests/                    # Kiểm tra nhãn và khóa order_id
-├── .gitignore
-├── requirements.txt
-└── README.md
+Tấn Lên (Ch1/Ch6) ─────────────────────────────────────────┐
+Ngọc Lan (Ch2, lý thuyết) ──────────────────────────────────┤
+Lam Linh  (Ch3: Olist 9 CSV → data cấp đơn)                 │
+        ↓                                                    │
+Trúc Chi  (Ch4: temporal split → Dummy/RF/MLP → Test preds) │
+        ↓                                                    │
+Vĩnh Chi  (Ch5: metric, PR Curve, Top-K và lỗi)              │
+        └────────────────────────────────────────────────────┤
+                                                             ↓
+                                              06_FINAL (tổng hợp)
+                                                             ↓
+                                              Báo cáo + Streamlit + bảo vệ
 ```
 
-## Bắt đầu làm việc
+**Thực thi thực nghiệm:** chạy notebook Ch3 → Ch4 → Ch5 → FINAL khi đã có dữ liệu Olist; Ch1 và Ch2 làm song song, rà soát trước khi chốt. **Không đào tạo mô hình trong FINAL.**
+
+## Cài đặt
 
 ```bash
 git clone https://github.com/tanlen06-debug/Do_An_Khoa_hoc_du_lieu---GR02.git
 cd Do_An_Khoa_hoc_du_lieu---GR02
 python -m venv .venv
-# Windows PowerShell:
+# Windows PowerShell
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-pytest -q
-streamlit run app/app.py
+jupyter lab
 ```
 
-Tải 9 tệp CSV từ Kaggle vào `data/raw/` theo [hướng dẫn dữ liệu](data/README.md). Notebook hiện là **khung hướng dẫn**; cần triển khai code, kiểm tra và thay thế phần TODO bằng kết quả chạy thực tế.
+Tải 9 tệp CSV vào `data/raw/` theo [data/README.md](data/README.md). Dữ liệu raw/processed, `joblib` và secrets không được push.
 
-## Nguyên tắc thống nhất (không được đổi tùy ý)
+## Thống nhất chuyên môn
 
-1. **Thời điểm dự báo:** `order_approved_at` (đề xuất đã dùng trong kế hoạch), chỉ dùng đặc trưng thực sự có ở thời điểm này.
-2. **Nhãn:** `is_late=1` khi **ngày** giao thực tế > **ngày** giao dự kiến; sử dụng ngày giao thực tế để tạo nhãn, **không dùng làm đầu vào**.
-3. **Đơn vị quan sát:** một `order_id` = một dòng ở bảng cuối. Kiểm tra join one-to-many và dòng trùng.
-4. **Thiết kế đánh giá:** Train/Validation/Test theo thời gian. Fit preprocessing chỉ trên Train, chọn tham số/ngưỡng ở Validation, Test để đánh giá cuối.
-5. **Mô hình:** Dummy (baseline tham chiếu), Random Forest (ML) và MLP (DL); kết quả được đánh giá bằng Precision, Recall, F1, Average Precision (AP), cảnh báo sai và Top-K.
-6. **Giới hạn:** huấn luyện trên các đơn đã giao có nhãn; dữ liệu Brazil 2016–2018 không đại diện tự động cho thị trường Việt Nam 2026.
+- **Mốc dự báo:** `order_approved_at`.
+- **Nhãn trễ:** `DATE(actual_delivery) > DATE(estimated_delivery)`; `actual_delivery` chỉ dùng tạo nhãn và kiểm tra hậu nghiệm.
+- **Grain:** một dòng cho mỗi `order_id`.
+- **Temporal split** và fit preprocessing **train-only**; **chọn ngưỡng trên Validation**, Test chỉ đánh giá cuối.
+- **Mô hình:** Dummy tham chiếu, Random Forest (ML), MLP (DL).
+- **Đánh giá:** Precision, Recall, F1, Average Precision (AP), FP và Precision@K/Recall@K.
+- **Giới hạn:** delivered-only, Brazil 2016–2018; dashboard chỉ là **demo hồi cứu**.
 
-Đọc [DATA_CONTRACT](docs/DATA_CONTRACT.md), [EXPERIMENT_PROTOCOL](docs/EXPERIMENT_PROTOCOL.md), [TEAM_WORKFLOW](docs/TEAM_WORKFLOW.md) **trước khi code**.
+## Quy trình GitHub
 
-## Giao việc và kiểm tra
+Chỉ dùng **`main` làm nhánh gốc có sẵn**. Các thành viên **tự tạo nhánh** từ main lúc bắt đầu làm:
+```bash
+git switch main
+git pull origin main
+git switch -c feature/ten-cua-ban-nhiem-vu
+# sửa file thuộc nhiệm vụ của mình
+git add notebooks/03_LAM_LINH_chuong_3.ipynb
+git commit -m "feat(ch03): implement Olist EDA"
+git push -u origin feature/ten-cua-ban-nhiem-vu
+```
+Tạo Pull Request về main để được review; sau khi merge, xóa nhánh feature không còn dùng. Chi tiết tại [TEAM_WORKFLOW](docs/TEAM_WORKFLOW.md).
 
-- Thành viên làm trên nhánh cá nhân/chương, tạo Pull Request (PR) vào `main`, có bằng chứng chạy và người review.
-- **Không push trực tiếp vào `main`**, không force-push, không commit CSV gốc/đã xử lý, token, môi trường ảo hoặc model lớn.
-- `main` chứa phiên bản đã review; GitHub Issues dùng theo dõi công việc, Google Sheets theo dõi mốc nội bộ.
-- Lộ trình bàn giao: **Lam Linh → Trúc Chi → Vĩnh Chi → Tấn Lên**; Ngọc Lan viết lý thuyết song song và đối chiếu cách cài đặt.
+**Theo dõi công việc:** [Google Sheet GR02](https://docs.google.com/spreadsheets/d/1bbsNPpLUnJDNtUY-1TLw942ftK-fQfL8t-_j4jZkywY/edit) (tabs 04_BAO_CAO, 06_KE_HOACH, 09_MOC_BAN_GIAO) và [GitHub Issues](https://github.com/tanlen06-debug/Do_An_Khoa_hoc_du_lieu---GR02/issues).
 
-**Chú ý:** Tài khoản GitHub của Ngọc Lan, Lam Linh, Trúc Chi và Vĩnh Chi chưa được xác minh; chỉ gán assignee khi biết đúng username và đã có quyền truy cập repository.
+**Kiểm thử code hiện có:** `pytest -q`. Chạy `streamlit run app/app.py` để mở dashboard khung (chưa gắn model khi chưa có kết quả thực nghiệm).

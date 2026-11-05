@@ -1,51 +1,52 @@
-# Quy trình làm việc GitHub – Nhóm 02
+# QUY TRÌNH GITHUB – NHÓM 02 (CẬP NHẬT 05/11/2026)
 
-## Vai trò (theo phân công báo cáo)
-
-- Tấn Lên: Chương 1, Chương 6, phụ lục, trưởng nhóm / review tích hợp.
-- Ngọc Lan: Chương 2 (lý thuyết, trích dẫn và consistency).
-- Lam Linh: Chương 3 (data ingestion, preprocessing, EDA, feature registry).
-- Trúc Chi: Chương 4 (split, baseline, ML, MLP, tuning).
-- Vĩnh Chi: Chương 5 (test report, error analysis, Top-K, limitations).
-
-## Nhánh và Pull Request
-
-`main`: nhánh tích hợp có review. Mỗi thành viên làm trên nhánh được phân theo chương (xem GitHub branches), có thể tạo nhánh công việc phụ theo mẫu `feature/ch03-short-task` nếu cần.
+## Quy ước nhánh
+**Chỉ duy trì sẵn `main`** – nhánh tích hợp có tài liệu và notebook chung. **Nhóm trưởng không tạo sẵn branch cá nhân.** Mỗi thành viên tự tạo nhánh từ `main` mới nhất và đặt tên `feature/<thanh-vien>-<nhiem-vu>` khi bắt đầu.
 
 ```bash
 git clone https://github.com/tanlen06-debug/Do_An_Khoa_hoc_du_lieu---GR02.git
 cd Do_An_Khoa_hoc_du_lieu---GR02
 git switch main
 git pull origin main
-git switch -c feature/ch03-data-audit
-# thực hiện thay đổi và tự kiểm tra...
-git add <duong-dan-file-cua-minh>
-git commit -m "feat(ch03): add Olist profiling notebook"
-git push -u origin feature/ch03-data-audit
-# Tạo Pull Request từ feature/... vào main trên GitHub
+git switch -c feature/lam-linh-ch03-data
+# Chỉnh sửa và kiểm thử, không commit CSV, model lớn, token
+git status
+git add notebooks/03_LAM_LINH_chuong_3.ipynb
+git commit -m "feat(ch03): add validated Olist features"
+git push -u origin feature/lam-linh-ch03-data
+# Tạo Pull Request về main; khi được duyệt thì merge.
 ```
 
-**Không dùng `git add .` nếu chưa kiểm tra `git status`.** Trước khi tạo PR, chạy `pytest -q`, kiểm tra notebook không có dữ liệu nhạy cảm / output quá lớn, mô tả kết quả và link Issue.
+**Sau khi nhánh feature đã merge và không còn cần giữ, người tạo có thể xóa nhánh của mình trên GitHub.** Không bao giờ xóa `main`.
 
-## Nguyên tắc phối hợp
+## Mỗi thành viên làm trong file nào?
+| Thành viên | Notebook chính | Markdown lý thuyết | File báo cáo |
+|---|---|---|---|
+| Tấn Lên | `01_TAN_LEN_chuong_1_6.ipynb` | `docs/theory/01_tan_len_ch1_ch6.md` | `CH01_OVERVIEW.md`, `CH06_DASHBOARD.md`, `APPENDIX.md` |
+| Ngọc Lan | `02_NGOC_LAN_chuong_2.ipynb` | `docs/theory/02_ngoc_lan_ch2.md` | `CH02_THEORY.md` |
+| Lam Linh | `03_LAM_LINH_chuong_3.ipynb` | `docs/theory/03_lam_linh_ch3.md` | `CH03_DATA.md` |
+| Trúc Chi | `04_TRUC_CHI_chuong_4.ipynb` | `docs/theory/04_truc_chi_ch4.md` | `CH04_MODELING.md` |
+| Vĩnh Chi | `05_VINH_CHI_chuong_5.ipynb` | `docs/theory/05_vinh_chi_ch5.md` | `CH05_RESULTS.md` |
+| Cả nhóm | `06_FINAL_tong_hop_do_an.ipynb` | `docs/theory/06_final_integration.md` | Báo cáo và slide cuối |
 
-1. Không tự sửa đầu ra đã được owner khác bàn giao (không sửa định nghĩa is_late, split hay test scores khi chưa trao đổi).
-2. Data owner xuất một dataset/scheme duy nhất, lập `data dictionary`, kiểm tra số bản ghi và hash/version.
-3. Model owner dùng schema/data split đã đóng băng; không tính giá trị tương lai cho feature.
-4. Evaluation owner nhận file xác suất trên **tập Test cố định**, đối soát với số liệu model owner.
-5. Dashboard owner chỉ tải pipeline đã kiểm tra và dữ liệu demo hợp lệ; không tự huấn luyện lại bằng Test.
-6. Người review kiểm tra code, kết quả, leakage, tương thích schema và thông tin nguồn trước khi merge.
-7. Khi gặp blocker quá 24h, mở Issue hoặc ghi vào tab `11_LOG_VUONG_MAC`; trao đổi trước khi đổi hợp đồng dữ liệu.
-8. Cuối ngày có làm việc: cập nhật trạng thái và link minh chứng ở Google Sheets.
+Đừng sửa cùng lúc notebook của người khác trên nhiều nhánh. Mọi thay đổi vào `src/` hoặc hợp đồng dữ liệu cần được owner liên quan review trước khi merge.
 
-## Quy tắc commit
+## Trình tự & bàn giao
+Lam Linh Ch3 → Trúc Chi Ch4 → Vĩnh Chi Ch5 → Tấn Lên Ch6/FINAL. Ngọc Lan tổng quan lý thuyết song song, kiểm tra thuật toán và chỉ số có trùng với kết quả thật hay không.
 
-- `docs(ch02): add literature comparison`
-- `feat(ch03): create one-order dataset`
-- `feat(ch04): train random forest`
-- `test: add late label edge cases`
-- `fix(ch05): correct AP reporting`
+- Ch3: `data/processed/orders_model_ready.csv`; schema, nhãn, QA, feature whitelist.
+- Ch4: `test_predictions.csv`, `experiment_metadata.json`, `models/champion.joblib`; threshold được chọn trên Validation.
+- Ch5: `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png`.
+- Ch6/FINAL: kiểm tra file, áp dụng model đã review và tổng hợp báo cáo. **Không dùng Test để lựa chọn mô hình.**
 
-## Nguyên tắc nghiệm thu
+## Tiêu chí PR
+1. Có mô tả task/Issue, file đã thay đổi, lệnh chạy, ảnh/bảng và tình trạng chạy thật.
+2. Chạy `pytest -q` và notebook từ đầu (khi đã có data); không commit notebook output quá lớn.
+3. Không commit CSV gốc/processed, model lớn, file `.env`, token.
+4. Không thêm biến dữ liệu sau `order_approved_at` vào X.
+5. Có người nhận bàn giao review và cập nhật `Google Sheets 04_BAO_CAO / 06_KE_HOACH`.
 
-PR phải có: mục tương ứng 04_BAO_CAO, file thay đổi, cách chạy, số liệu/hình minh chứng (nếu đã có), kiểm tra đối chiếu với owner liền kề, và xác nhận không có Data Leakage.
+## Hạn triển khai
+Theo `docs/PLAN_NOV2026.md`: chốt bài toán 06/11, dataset 12–16/11, model 22/11, Test 24/11, báo cáo/demo 27/11 và hoàn tất nội bộ 30/11/2026.
+
+**Nguồn quy tắc:** [Notebook guide](NOTEBOOK_GUIDE.md), [Data contract](DATA_CONTRACT.md), [Experiment protocol](EXPERIMENT_PROTOCOL.md), [Final integration](theory/06_final_integration.md).
