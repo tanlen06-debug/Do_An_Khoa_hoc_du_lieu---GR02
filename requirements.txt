@@ -1,0 +1,11 @@
+# Bộ phụ thuộc khởi tạo; khi thực nghiệm phải khóa phiên bản thực tế đã chạy.
+pandas>=2.1,<3
+numpy>=1.24,<3
+scikit-learn>=1.3,<2
+matplotlib>=3.7
+seaborn>=0.12
+plotly>=5.18
+streamlit>=1.32
+joblib>=1.3
+jupyterlab>=4
+pytest>=7

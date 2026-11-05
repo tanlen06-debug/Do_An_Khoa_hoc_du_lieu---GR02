@@ -1,0 +1,40 @@
+# Python / Jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+build/
+dist/
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Dữ liệu Olist, dữ liệu đã xử lý và artifact lớn / nhạy cảm
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/*
+!models/README.md
+artifacts/
+*.joblib
+*.pkl
+*.pickle
+*.parquet
+*.feather
+# Local logs
+logs/
+*.log
