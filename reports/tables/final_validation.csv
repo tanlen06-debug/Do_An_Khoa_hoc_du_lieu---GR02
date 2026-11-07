@@ -1,0 +1,9 @@
+Nội dung kiểm tra,Số lượng,Kết quả
+Đủ 9 CSV sau làm sạch,9,Đạt
+Số dòng sau join bằng số đơn ban đầu,99441,Đạt
+Khóa order_id duy nhất trong tập có nhãn,96456,Đạt
+Đơn có nhãn hợp lệ,96456,Đạt
+Cột được mô tả trong schema,37,Đạt
+Đặc trưng trong baseline,5,Đạt
+Tổng tiền và số item được bảo toàn,4,Đạt
+Tệp raw giữ nguyên SHA256,9,Đạt

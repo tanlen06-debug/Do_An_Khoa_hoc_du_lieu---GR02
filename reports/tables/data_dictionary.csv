@@ -28,7 +28,7 @@ products,product_category_name,Danh mục tiếng Bồ Đào Nha,string,False,61
 products,product_name_lenght,"Độ dài tên sản phẩm, tên cột gốc",float64,False,610
 products,product_description_lenght,"Độ dài mô tả, tên cột gốc",float64,False,610
 products,product_photos_qty,Số ảnh sản phẩm,float64,False,610
-products,product_weight_g,Trọng lượng gram; <=0 chuyển NA theo chính sách đề xuất,float64,False,6
+products,product_weight_g,Trọng lượng gram; <=0 chuyển NA theo quy tắc làm sạch,float64,False,6
 products,product_length_cm,Chiều dài cm,float64,False,2
 products,product_height_cm,Chiều cao cm,float64,False,2
 products,product_width_cm,Chiều rộng cm,float64,False,2

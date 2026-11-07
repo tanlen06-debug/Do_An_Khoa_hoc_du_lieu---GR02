@@ -1,27 +1,40 @@
-feature,source,availability,decision,note
-purchase_month_number,orders,at_or_before_approved_at_per_group_contract,allowed_baseline,No learned imputation/scaling applied here
-purchase_weekday,orders,at_or_before_approved_at_per_group_contract,allowed_baseline,No learned imputation/scaling applied here
-purchase_hour,orders,at_or_before_approved_at_per_group_contract,allowed_baseline,No learned imputation/scaling applied here
-approval_delay_hours,orders,at_or_before_approved_at_per_group_contract,allowed_baseline,No learned imputation/scaling applied here
-customer_state,customers,at_or_before_approved_at_per_group_contract,allowed_baseline,No learned imputation/scaling applied here
-total_price,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-total_freight,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-seller_count,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-item_count,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-avg_weight_g,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-seller_region,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-product_category,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-total_payment,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-order_estimated_delivery_date,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-shipping_limit_date,source_table_or_aggregation,needs_verification,needs_review,EDA only until availability at t0 is confirmed
-order_delivered_customer_date,orders_or_reviews,post_outcome,forbidden_as_feature,Label / sample / retrospective analysis only
-order_delivered_carrier_date,orders_or_reviews,post_outcome,forbidden_as_feature,Label / sample / retrospective analysis only
-order_status,orders_or_reviews,post_outcome,forbidden_as_feature,Label / sample / retrospective analysis only
-review_score,orders_or_reviews,post_outcome,forbidden_as_feature,Label / sample / retrospective analysis only
-qa_unknown_status,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_approved_before_purchase,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_carrier_before_approved,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_delivery_before_carrier,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_delivery_before_approved,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_delivery_before_purchase,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
-qa_estimate_before_purchase,quality_audit,may_use_future_information,excluded_from_baseline,QA only; do not automatically include flags in X
+feature,dtype,missing,role,source,meaning,use_in_X,feature_policy,present_in_export
+order_id,string,0.0,metadata,orders,"Khóa đối soát, không làm X",False,not_in_baseline,True
+customer_id,string,0.0,metadata,orders/customers,"Khóa liên kết, không làm X",False,not_in_baseline,True
+order_status,string,0.0,forbidden_feature,orders,Trạng thái cuối dùng chọn mẫu,False,not_in_baseline,True
+order_purchase_timestamp,datetime64[ns],0.0,metadata,orders,Nguồn tạo các feature thời gian,False,not_in_baseline,True
+order_approved_at,datetime64[ns],0.0,metadata,orders,Mốc t0 và chia tập thời gian,False,not_in_baseline,True
+order_delivered_carrier_date,datetime64[ns],1.0,forbidden_feature,orders,Mốc sau phê duyệt,False,not_in_baseline,True
+order_delivered_customer_date,datetime64[ns],0.0,forbidden_feature,orders,Chỉ tạo nhãn và kiểm tra nhãn đủ chín,False,not_in_baseline,True
+order_estimated_delivery_date,datetime64[ns],0.0,excluded_unverified,orders,Dùng tạo nhãn; nếu làm feature phải chứng minh có tại t0,False,not_in_baseline,True
+qa_unknown_status,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_approved_before_purchase,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_carrier_before_approved,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_delivery_before_carrier,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_delivery_before_approved,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_delivery_before_purchase,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+qa_estimate_before_purchase,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True
+customer_state,string,0.0,baseline_feature,customers,Bang khách tại lúc đặt/duyệt,True,baseline_at_t0,True
+item_count,float64,0.0,excluded_unverified,order_items,Số dòng item/đơn,False,not_in_baseline,True
+product_count,float64,0.0,excluded_unverified,order_items,Số product_id khác nhau/đơn,False,not_in_baseline,True
+seller_count,float64,0.0,excluded_unverified,order_items,Số seller_id khác nhau/đơn,False,not_in_baseline,True
+total_price,float64,0.0,excluded_unverified,order_items,"Tổng price, BRL; không bao gồm freight",False,not_in_baseline,True
+total_freight,float64,0.0,excluded_unverified,order_items,"Tổng freight_value, BRL",False,not_in_baseline,True
+price_known_items,float64,0.0,qa_metadata,order_items,Số item có giá,False,not_in_baseline,True
+freight_known_items,float64,0.0,qa_metadata,order_items,Số item có phí,False,not_in_baseline,True
+avg_weight_g,float64,22.0,excluded_unverified,products + items,"Trung bình gram/item có số đo, không phải tổng kiện",False,not_in_baseline,True
+weight_known_items,float64,0.0,qa_metadata,products + items,Số item có khối lượng,False,not_in_baseline,True
+seller_region,string,0.0,excluded_unverified,sellers + items,Một bang hoặc MULTI nếu nhiều bang,False,not_in_baseline,True
+product_category,string,0.0,excluded_unverified,products + items,Một category hoặc MULTI nếu nhiều category,False,not_in_baseline,True
+total_payment,float64,1.0,excluded_unverified,payments,Tổng thanh toán theo đơn,False,not_in_baseline,True
+payment_records,float64,1.0,excluded_unverified,payments,Số bản ghi thanh toán theo đơn,False,not_in_baseline,True
+is_late,int64,0.0,target,orders,"DATE(actual)>DATE(estimated), chỉ delivered đủ ngày",False,not_in_baseline,True
+purchase_month,string,0.0,eda_only,orders,Tháng YYYY-MM để vẽ EDA,False,not_in_baseline,True
+order_value_group,category,0.0,eda_only,items,Nhóm total_price dùng cho EDA,False,not_in_baseline,True
+weight_group,category,22.0,eda_only,products + items,Nhóm avg_weight_g dùng cho EDA,False,not_in_baseline,True
+purchase_month_number,int32,0.0,baseline_feature,orders,"Tháng đặt hàng, 1–12",True,baseline_at_t0,True
+purchase_weekday,int32,0.0,baseline_feature,orders,"Thứ đặt hàng, 0=thứ Hai, 6=Chủ nhật",True,baseline_at_t0,True
+purchase_hour,int32,0.0,baseline_feature,orders,"Giờ đặt hàng, 0–23",True,baseline_at_t0,True
+approval_delay_hours,float64,0.0,baseline_feature,orders,"(approved - purchase), giờ",True,baseline_at_t0,True
+shipping_limit_date,,,excluded_unverified,items,"Có ở bảng item, không có trong bảng cấp đơn hiện tại",False,,False
+review_score,,,forbidden_feature,reviews,"Thông tin đánh giá hậu nghiệm, không làm đầu vào dự báo sớm",False,,False
