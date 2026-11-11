@@ -45,3 +45,6 @@ Kết luận vận hành phải gắn với số đơn nhận diện đúng và 
 - Bản Ch5 trong `reports/chapters/CH05_RESULTS.md`, nhất quán Ch2 và Ch4.
 
 Không tạo metric giả khi chưa nhận frozen Test predictions.
+
+## Phân công mới: kiểm tra độc lập cả ba mô hình
+Vĩnh Chi không chỉ đọc file dự đoán có sẵn mà cần **nạp lại** các artifact RF từ Ngọc Lan, Dummy và MLP từ Trúc Chi. Xác minh `split_id`, thứ tự `order_id` và tính lại `predict_proba(X_test)` cho cả ba (không gọi fit). Đối soát với `test_predictions.csv`, sau đó tính lại P/R/F1/AP/FP, PR curve và Top-K trên **cùng frozen Test**. Không tự chọn ngưỡng hay K dựa trên Test.

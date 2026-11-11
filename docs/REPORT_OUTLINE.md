@@ -11,8 +11,8 @@ Nội dung và người phụ trách theo bản phân công của nhóm, không 
 ## Chương 2 – Ngọc Lan
 - **2.1** Cơ sở e-commerce logistics
 - **2.2** Khai thác dữ liệu và EDA
-- **2.3** Thuật toán Machine Learning / Deep Learning (Dummy, RF, MLP)
-- **2.4** Độ đo trên dữ liệu mất cân bằng (Precision, Recall, F1, AP, FP, Top-K)
+- **2.3** Thuật toán ML/DL (Dummy, RF, MLP) và **Ngọc Lan thực hành huấn luyện Random Forest trên Train chung**
+- **2.4** Độ đo Precision, Recall, F1, AP/PR-AUC, FP, Top-K; Ngọc Lan thực nghiệm **RF trên Validation**
 - **2.5** Công trình liên quan (3–5 công trình)
 
 ## Chương 3 – Lam Linh
@@ -25,12 +25,12 @@ Nội dung và người phụ trách theo bản phân công của nhóm, không 
 ## Chương 4 – Trúc Chi
 - **4.1** Đánh giá theo thời gian, Train/Validation/Test
 - **4.2** Tiền xử lý fit Train-only và Dummy baseline
-- **4.3** Huấn luyện Random Forest
-- **4.4** Huấn luyện MLP
-- **4.5** Chọn ngưỡng và Top-K trên Validation
+- **4.3** Trúc Chi tiếp nhận và kiểm chứng Random Forest đã được Ngọc Lan huấn luyện; **không fit lại RF**
+- **4.4** Trúc Chi huấn luyện MLP (Dummy ở mục 4.2)
+- **4.5** Tích hợp RF (Ngọc Lan) + Dummy/MLP (Trúc Chi), chọn ngưỡng/champion trên Validation
 
 ## Chương 5 – Vĩnh Chi
-- **5.1** Kết quả cuối trên Test (P/R/F1/AP/FP, confusion matrix)
+- **5.1** Vĩnh Chi đánh giá lại độc lập RF/Dummy/MLP trên frozen Test (P/R/F1/AP/FP, confusion matrix)
 - **5.2** Phân tích lỗi theo nhóm
 - **5.3** Giá trị vận hành (Precision@K, Recall@K, cảnh báo sai)
 - **5.4** Hạn chế và thiên lệch mẫu
