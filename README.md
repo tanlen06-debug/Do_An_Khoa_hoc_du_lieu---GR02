@@ -11,10 +11,10 @@
 | Thành viên | Nội dung báo cáo | Notebook | Lý thuyết Markdown |
 |---|---|---|---|
 | **Tấn Lên** | Chương 1, Chương 6, phụ lục và tích hợp | [01_TAN_LEN](notebooks/01_TAN_LEN_chuong_1_6.ipynb) | [Lý thuyết Ch1/6](docs/theory/01_tan_len_ch1_ch6.md) |
-| **Ngọc Lan** | Chương 2: cơ sở lý thuyết | [02_NGOC_LAN](notebooks/02_NGOC_LAN_chuong_2.ipynb) | [Lý thuyết Ch2](docs/theory/02_ngoc_lan_ch2.md) |
+| **Ngọc Lan** | Chương 2 lý thuyết + train Random Forest; P/R/F1/AP/FP/Top-K Validation | [02_NGOC_LAN](notebooks/02_NGOC_LAN_chuong_2.ipynb) | [Lý thuyết Ch2](docs/theory/02_ngoc_lan_ch2.md) |
 | **Lam Linh** | Chương 3: dữ liệu, EDA, feature | [03_LAM_LINH](notebooks/03_LAM_LINH_chuong_3.ipynb) | [Lý thuyết Ch3](docs/theory/03_lam_linh_ch3.md) |
-| **Trúc Chi** | Chương 4: Dummy, RF, MLP và tuning | [04_TRUC_CHI](notebooks/04_TRUC_CHI_chuong_4.ipynb) | [Lý thuyết Ch4](docs/theory/04_truc_chi_ch4.md) |
-| **Vĩnh Chi** | Chương 5: đánh giá, error analysis | [05_VINH_CHI](notebooks/05_VINH_CHI_chuong_5.ipynb) | [Lý thuyết Ch5](docs/theory/05_vinh_chi_ch5.md) |
+| **Trúc Chi** | Chương 4 tạo split, fit Dummy/MLP; nạp RF Ngọc Lan, chốt Validation | [04_TRUC_CHI](notebooks/04_TRUC_CHI_chuong_4.ipynb) | [Lý thuyết Ch4](docs/theory/04_truc_chi_ch4.md) |
+| **Vĩnh Chi** | Chương 5 đánh giá độc lập cả ba mô hình trên Test, phân tích lỗi | [05_VINH_CHI](notebooks/05_VINH_CHI_chuong_5.ipynb) | [Lý thuyết Ch5](docs/theory/05_vinh_chi_ch5.md) |
 | **Cả nhóm – Tấn Lên tích hợp** | Tổng hợp toàn bộ đồ án sau khi hoàn thành | [06_FINAL](notebooks/06_FINAL_tong_hop_do_an.ipynb) | [Hướng dẫn final](docs/theory/06_final_integration.md) |
 
 [Hướng dẫn chi tiết từng notebook](docs/NOTEBOOK_GUIDE.md) · [Đề cương 6 chương / 27 hạng mục](docs/REPORT_OUTLINE.md) · [Kế hoạch tháng 11](docs/PLAN_NOV2026.md).
@@ -23,10 +23,10 @@
 
 ```text
 Tấn Lên (Ch1/Ch6) ─────────────────────────────────────────┐
-Ngọc Lan (Ch2, lý thuyết) ──────────────────────────────────┤
+Ngọc Lan (Ch2: lý thuyết + RF/Validation) ───────────────────┤
 Lam Linh  (Ch3: Olist 9 CSV → data cấp đơn)                 │
         ↓                                                    │
-Trúc Chi  (Ch4: temporal split → Dummy/RF/MLP → Test preds) │
+Trúc Chi (Ch4: split → Dummy/MLP + RF Ngọc Lan → Test)      │
         ↓                                                    │
 Vĩnh Chi  (Ch5: metric, PR Curve, Top-K và lỗi)              │
         └────────────────────────────────────────────────────┤
@@ -36,7 +36,7 @@ Vĩnh Chi  (Ch5: metric, PR Curve, Top-K và lỗi)              │
                                               Báo cáo + Streamlit + bảo vệ
 ```
 
-**Thực thi thực nghiệm:** chạy notebook Ch3 → Ch4 → Ch5 → FINAL khi đã có dữ liệu Olist; Ch1 và Ch2 làm song song, rà soát trước khi chốt. **Không đào tạo mô hình trong FINAL.**
+**Thứ tự chạy thực nghiệm:** Ch3 (Lam Linh) → Ch4 (Trúc Chi) chạy **tới cell chia tập chung** → Ch2 (Ngọc Lan) train RF và đánh giá Validation → Ch4 (Trúc Chi) tiếp tục train Dummy/MLP, tích hợp RF và xuất frozen Test → Ch5 (Vĩnh Chi) đánh giá lại cả 3 trên Test → FINAL (Tấn Lên). Ch1 và lý thuyết Ch2 vẫn làm song song. **Không fit RF lại trong Ch4 hoặc fit mô hình trong FINAL.**
 
 ## Cài đặt
 

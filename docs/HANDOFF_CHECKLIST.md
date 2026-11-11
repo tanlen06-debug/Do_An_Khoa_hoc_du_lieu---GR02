@@ -1,40 +1,36 @@
-# CHECKLIST BÀN GIAO 5 THÀNH VIÊN → NOTEBOOK FINAL
+# Checklist bàn giao liên chương (phân công mới)
 
-## Tấn Lên – Chương 1, 6 và phụ lục
-- [ ] Ch1 có lý do chọn đề tài, bài toán dự đoán tại approved_at, mục tiêu và giới hạn.
-- [ ] Ch6 có sơ đồ dashboard, kiểm thử, README, demo/hình chụp khi đủ model.
-- [ ] `01_TAN_LEN_chuong_1_6.ipynb` và Markdown lý thuyết được cập nhật đúng.
-- [ ] Chỉ dùng chỉ số của Ch5 để viết kết luận; không tự tạo số liệu.
+## Tấn Lên – Ch1, Ch6 và FINAL
+- [ ] Ch1 định nghĩa bài toán, nhãn và mốc approved_at; Ch6/FINAL dùng metrics Ch5.
+- [ ] Dashboard/reports và slides không ghi số liệu chưa thực nghiệm.
 
-## Ngọc Lan – Chương 2
-- [ ] `02_NGOC_LAN_chuong_2.ipynb`, `docs/theory/02_ngoc_lan_ch2.md`.
-- [ ] Có logistics, EDA, Random Forest, MLP, Dummy, P/R/F1/AP/Top-K.
-- [ ] Có bảng 3–5 nghiên cứu liên quan **đã kiểm chứng nguồn**; đối chiếu với Ch4/Ch5.
+## Lam Linh – Ch3 → Trúc Chi & Ngọc Lan
+- [ ] Dataset 1 dòng/order_id, `orders_model_ready.csv`; schema, QA, nhãn, EDA, feature whitelist.
+- [ ] Dữ liệu đủ để Trúc Chi tạo split chung; ghi rõ selection bias (đơn delivered).
 
-## Lam Linh – Chương 3 → Trúc Chi
-- [ ] `03_LAM_LINH_chuong_3.ipynb` chạy được trên Olist đã tải.
-- [ ] 1 dòng/order_id, nhãn theo ngày, có số mẫu bị loại, EDA kèm insight.
-- [ ] Có `orders_model_ready.csv`, dữ liệu dictionary, feature whitelist; audit leakage tại approved_at.
-- [ ] Trúc Chi xác nhận schema và dataset đã nhận (mốc 12–16/11).
+## Trúc Chi – 4.1: bàn giao split chung
+- [ ] `split_manifest.csv`, `split_metadata.json`, `split_id` và SHA256 dữ liệu; train/val/test không trùng đơn.
+- [ ] Nhãn Train/Validation đủ trưởng thành tại cutoff; Ngọc Lan dùng đúng các bản ghi.
 
-## Trúc Chi – Chương 4 → Vĩnh Chi
-- [ ] `04_TRUC_CHI_chuong_4.ipynb` chạy được sau Ch3.
-- [ ] Train/Val/Test theo thời gian; imputer/encoder/scaler fit Train-only.
-- [ ] Dummy, RF, MLP; chọn model/ngưỡng theo Validation, Test đóng băng.
-- [ ] Có `test_predictions.csv`, `experiment_metadata.json`, `models/champion.joblib`.
-- [ ] Vĩnh Chi xác nhận bản giao đến 22–24/11.
+## Ngọc Lan – 2.3/2.4: RF → Trúc Chi
+- [ ] Có lý thuyết 2.1–2.5 và nghiên cứu liên quan có nguồn.
+- [ ] Train RF trên Train của split chung; chọn hyperparams/ngưỡng theo Validation, không nhìn Test.
+- [ ] Tính Precision, Recall, F1, AP/PR-AUC, FP và Top-K **trên Validation**.
+- [ ] Bàn giao `models/ngoc_lan_random_forest.joblib`, `data/processed/rf_val_predictions.csv`, `rf_metadata.json` cùng `split_id`, trước 20/11.
+- [ ] Trúc Chi kiểm tra artifact và đối chiếu xác suất Validation.
 
-## Vĩnh Chi – Chương 5 → Tấn Lên
-- [ ] `05_VINH_CHI_chuong_5.ipynb` chỉ đọc frozen Test; không fit mô hình.
-- [ ] Metrics P/R/F1/AP/FP, confusion matrix, PR Curve, Precision@K/Recall@K.
-- [ ] Có `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png`.
-- [ ] Tấn Lên nhận và đối chiếu số liệu 24–25/11.
+## Trúc Chi – 4.2–4.5: Dummy/MLP + RF tích hợp → Vĩnh Chi
+- [ ] Chỉ fit Dummy và MLP trên Train chung; RF nạp từ Ngọc Lan, **không fit RF lần hai**.
+- [ ] Chốt champion/ngưỡng theo Validation, không tune theo Test.
+- [ ] Xuất frozen `test_predictions.csv`, `experiment_metadata.json`, fitted Dummy/MLP và champion artifacts.
+- [ ] Vĩnh Chi nhận file Test và các model đủ để tự tính lại.
+
+## Vĩnh Chi – Ch5 → Tấn Lên
+- [ ] Độc lập load RF, Dummy và MLP; tự `predict_proba` trên frozen Test; so với predictions Ch4.
+- [ ] Tính lại Precision, Recall, F1, AP, FP, confusion matrix, PR curve và Top-K của cả ba.
+- [ ] Bàn giao `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png` và nhận xét theo dữ liệu.
 
 ## Cả nhóm – 06_FINAL
-- [ ] Chạy tuần tự Ch3 → Ch4 → Ch5 → FINAL; notebooks Ch1/2 được rà soát và cập nhật.
-- [ ] FINAL khớp schema, số đơn, nhãn, cutoff, threshold, metric và mô hình.
-- [ ] Ch1–Ch6 + phụ lục, hình/bảng, trích dẫn và README khớp code.
-- [ ] Dashboard Streamlit chạy offline, minh họa đúng phạm vi nghiên cứu.
-- [ ] 27/11 bản đầy đủ; 28–29/11 review; hoàn tất nội bộ 30/11/2026.
-
-Các file CSV/model nội bộ được `.gitignore`. Đừng đánh dấu hoàn thành chỉ vì notebook có sẵn khung.
+- [ ] Ch3 → Ch4 split → Ch2 RF → Ch4 Dummy/MLP + frozen Test → Ch5 → FINAL.
+- [ ] Mọi model có owner và split_id, mọi số liệu Test có thể tái lập.
+- [ ] Báo cáo đủ 6 chương/27 hạng mục, không đổi người phụ trách chương hoặc deadline nội bộ 30/11/2026.

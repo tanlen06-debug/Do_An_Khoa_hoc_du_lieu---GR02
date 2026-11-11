@@ -32,10 +32,10 @@ Lấy dữ liệu gốc từ https://www.kaggle.com/datasets/olistbr/brazilian-e
 
 ## Đảm bảo các thành viên không làm trùng
 - Tấn Lên: không chạy lại RF/MLP trong notebook Ch1/6 hoặc FINAL.
-- Ngọc Lan: chỉ demo thuật toán trên bộ ví dụ giả định được ghi rõ; số liệu thực lấy từ Ch3–Ch5.
+- Ngọc Lan: trực tiếp huấn luyện RF trên Train chung và báo Precision/Recall/F1/AP/FP/Top-K Validation; bàn giao pipeline RF và metadata cho Trúc Chi.
 - Lam Linh: chịu trách nhiệm duy nhất trong việc định nghĩa nhãn và xuất bảng cấp đơn.
-- Trúc Chi: không tự thay đổi label/feature contract, model so sánh có cùng split, không tune Test.
-- Vĩnh Chi: không fit lại mô hình, dùng một frozen Test predictions để tính tất cả chỉ số.
+- Trúc Chi: tạo split chung và train Dummy/MLP; tiếp nhận RF của Ngọc Lan, kiểm tra cùng split_id, chọn champion/ngưỡng trên Validation, xuất frozen Test; không fit lại RF.
+- Vĩnh Chi: không fit lại mô hình; tải cả 3 model, tự tính lại xác suất trên frozen Test rồi tính metrics và Top-K cho RF/Dummy/MLP.
 - FINAL: đọc, đối chiếu artifact và tổng hợp; không train lại sau khi biết Test.
 
 ## Tự tạo nhánh GitHub
@@ -55,3 +55,6 @@ git push -u origin feature/ten-thanh-vien-nhiem-vu
 
 ## Khác biệt giữa tồn tại file và hoàn thành
 Notebook có nhiều cell hướng dẫn **không có nghĩa nhiệm vụ đã hoàn thành**. Chỉ đánh dấu `Hoàn thành` ở Sheets khi có chạy thành công, minh chứng, review và bản báo cáo đúng mẫu.
+
+## Thứ tự chạy mới: không trùng việc
+Ch3 Lam Linh → Ch4 Trúc Chi **tạo split chung** → Ch2 Ngọc Lan **RF trên Train/Validation** → Ch4 Trúc Chi **Dummy/MLP và tích hợp RF** → Ch5 Vĩnh Chi **đánh giá độc lập trên Test** → FINAL. Đọc [giao thức chung](EXPERIMENT_PROTOCOL.md).
