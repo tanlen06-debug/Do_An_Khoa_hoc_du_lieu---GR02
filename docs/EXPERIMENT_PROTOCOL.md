@@ -1,16 +1,22 @@
-# Giao thức thực nghiệm GR02 – chung split, tách người huấn luyện
+# Giao thức thực nghiệm GR02 – phân công huấn luyện chính thức (12/11/2026)
 
-**Giữ khung báo cáo 6 chương, 27 hạng mục.** Quy tắc chỉ điều chỉnh chủ sở hữu code và điểm bàn giao.
+**Đề cương giữ nguyên: 6 chương, 27 hạng mục + phụ lục; mục 4.4 vẫn thuộc Chương 4.** Chỉ thay người viết code huấn luyện MLP.
 
-1. **Lam Linh – Ch3:** xuất `orders_model_ready.csv`, 1 dòng/order_id, `is_late` theo ngày và feature hợp lệ tại `order_approved_at`.
-2. **Trúc Chi – 4.1:** tạo/chốt temporal Train–Validation–Test chung qua `src/experiment.py`; lưu `split_manifest.csv`, `split_metadata.json`, `split_id`, dữ liệu SHA256 và cutoff. Train và Validation chỉ dùng nhãn đã trưởng thành trước cutoff tiếp theo.
-3. **Ngọc Lan – 2.3/2.4:** train **Random Forest** trên Train chung, chọn tham số/threshold bằng **Validation**, đo Precision/Recall/F1/AP/FP/Top-K trên Validation. Bàn giao `ngoc_lan_random_forest.joblib`, `rf_val_predictions.csv` và `rf_metadata.json`.
-4. **Trúc Chi – 4.2/4.4:** train **Dummy và MLP** trên Train chung (fit preprocessing train-only). Phần 4.3 đọc RF của Ngọc Lan, kiểm tra `split_id`, features và xác suất Validation; **không fit lại RF**. Chọn mô hình chính RF/MLP theo AP Validation; giữ ngưỡng RF do Ngọc Lan chọn, chốt các ngưỡng còn lại bằng Validation.
-5. **Trúc Chi – 4.5:** sau khi chốt trên Validation, xuất `test_predictions.csv` (order_id, y_true, p_dummy, p_rf, p_mlp, y_pred_champion), `experiment_metadata.json`, `dummy_truc_chi.joblib`, `mlp_truc_chi.joblib`, `champion.joblib`.
-6. **Vĩnh Chi – Ch5:** trên **một frozen Test**, nạp model RF Ngọc Lan và Dummy/MLP Trúc Chi để `predict_proba(Test)` lại, so khớp file Ch4; **không fit**. Tính TP/FP/FN/TN, Precision, Recall, F1, Average Precision (AP, quy ước PR-AUC), PR Curve, Precision@K/Recall@K/FP@K cho **cả ba**.
-7. **Tấn Lên – Ch6/FINAL:** kiểm tra `split_id`, danh sách owner, scores và kết luận; demo Streamlit hồi cứu. Không tune hoặc train model bằng Test.
-8. **Không leakage:** chỉ feature có tại `order_approved_at`, loại các trường sau giao; fit imputer/encoder/scaler trên Train; không trộn nhãn Test vào tinh chỉnh.
-9. **Bàn giao có minh chứng:** mã nguồn có commit/PR; file CSV processed và binary model truyền nội bộ, không đẩy lên GitHub; ghi `split_id`, schema, seed, cutoff, số mẫu và tỷ lệ lớp.
-10. **Giới hạn:** Delivered-only; Olist Brazil 2016–2018; không tự tuyên bố hiệu quả vận hành tại Việt Nam hiện nay.
+## Phân công và giao thức dữ liệu
+1. **Lam Linh – Ch3:** tạo `data/processed/orders_model_ready.csv` ở grain 1 dòng/order_id, xây nhãn `is_late`, EDA và kiểm toán leakage tại `order_approved_at`.
+2. **Trúc Chi – Ch4.1:** tạo và kiểm tra chung `split_manifest.csv`, `split_metadata.json` qua `src/experiment.py`; thống nhất `split_id`, SHA256 dữ liệu, feature whitelist và cutoff. Train và Validation chỉ dùng nhãn đã trưởng thành tại cutoff tương ứng.
+3. **Ngọc Lan – Ch2.3/2.4:** thực hiện Random Forest trong notebook 02. Fit trên Train, chọn hyperparameters và threshold bằng **Validation**; đo Precision/Recall/F1/AP/FP/Top-K trên Validation. Bàn giao `models/ngoc_lan_random_forest.joblib`, `rf_val_predictions.csv`, `rf_metadata.json`.
+4. **Tấn Lên (TV1, nhóm trưởng) – thực nghiệm MLP cho 4.4:** thực hiện các cell trong notebook 01, dùng cùng split/feature. Fit MLP Pipeline trên Train, chọn kiến trúc/threshold bằng Validation; đo P/R/F1/AP/FP/Top-K Validation, lưu training loss. Bàn giao `models/tan_len_mlp.joblib`, `mlp_val_predictions.csv`, `mlp_metadata.json`. Trúc Chi viết nội dung mô hình MLP tại **mục 4.4 Chương 4** dựa trên sản phẩm này.
+5. **Trúc Chi (TV4) – Ch4.2–4.5:** **chỉ gọi fit để huấn luyện Dummy Classifier**. Nhận RF từ Ngọc Lan và MLP từ Tấn Lên; kiểm tra `split_id`, SHA256, `features`, thứ tự `order_id`, `y_true`, `predict_proba(Validation)`. **Không fit lại RF hay MLP.** Chốt champion giữa RF và MLP theo AP Validation, dùng threshold riêng đã chọn trên Validation; tạo frozen Test predictions.
+6. **Ch4 bàn giao:** `test_predictions.csv` chứa `order_id,y_true,p_dummy,p_rf,p_mlp,y_pred_champion`; `experiment_metadata.json` có `model_owners={"rf":"Ngọc Lan","mlp":"Tấn Lên","dummy":"Trúc Chi"}`, `split_id`, thresholds; `models/dummy_truc_chi.joblib`, `models/champion.joblib`. Dùng RF/MLP artifact gốc, không tạo model MLP thứ hai.
+7. **Vĩnh Chi (TV5) – Ch5:** đọc cùng một frozen Test; nạp 3 model đã fit, **tính lại** `predict_proba(Test)`, đối soát `test_predictions.csv`; tính TP/FP/FN/TN, Precision, Recall, F1, Average Precision (quy ước PR-AUC), confusion matrix, PR Curve, Precision@K/Recall@K/FP@K. Không gọi `fit`, không chọn threshold/K theo Test.
+8. **Tấn Lên – Ch6/FINAL:** chạy dashboard và kiểm tra đủ chủ mô hình, metadata, cutoff/split_id, bảng Test, báo cáo 6 chương. Không đào tạo mô hình lần hai trong FINAL.
 
-**Thứ tự chạy khi tái lập:** Ch3 → Ch4 đến split → Ch2 huấn luyện RF → Ch4 Dummy/MLP + tích hợp → Ch5 đánh giá độc lập → FINAL.
+## Quy định phương pháp
+- Thời điểm dự báo: `order_approved_at`; feature chỉ được biết ở thời điểm đó. Ngày giao thực tế dùng tạo nhãn và kiểm soát label maturity, **không vào X**.
+- Tất cả mô hình dùng cùng order_id/split, nhãn và whitelist; preprocessing `fit` chỉ trên Train (Pipeline của từng thành viên được phép khác nhau).
+- Mọi lựa chọn cấu hình/champion/threshold trên Validation; Test chỉ dùng đánh giá cuối sau khi đóng băng.
+- File binary mô hình và processed CSV bàn giao qua kênh nội bộ nhóm, không push lên GitHub; mã nguồn và Markdown cập nhật bằng Pull Request.
+- Chỉ công bố metric sau khi thực sự chạy Olist và Vĩnh Chi kiểm tra. Delivered-only gây selection bias; dữ liệu lịch sử Brazil 2016–2018 không mặc nhiên áp dụng cho sàn Việt Nam.
+
+**Thứ tự chạy:** Lam Linh Ch3 → Trúc Chi Ch4.1 tạo split → Ngọc Lan RF Ch2 và Tấn Lên MLP notebook 01 → Trúc Chi Ch4 fit Dummy + tích hợp → Vĩnh Chi Ch5 Test → 06_FINAL.
