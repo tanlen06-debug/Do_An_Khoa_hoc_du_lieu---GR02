@@ -20,12 +20,12 @@ RF tập hợp nhiều cây, học trên bootstrap samples; có thể bắt quan
 
 Ngọc Lan huấn luyện và chọn cấu hình RF trên Train/Validation của split chung ở Chương 2. Trúc Chi **không gọi fit lại RF**, chỉ nạp `ngoc_lan_random_forest.joblib`, `rf_val_predictions.csv`, `rf_metadata.json`; xác minh split_id, features, Validation order_id và probabilities, sau đó trình bày cấu hình/kết quả đã bàn giao.
 
-## 4.4 MLP
-Mạng fully-connected với hai lớp ẩn tham khảo `(64,32)`, `alpha=0.001`, early stopping, `random_state=42`. Không mặc định MLP sẽ hơn RF trên dữ liệu bảng. Giải thích loss và ảnh hưởng scale/one-hot/overfit. Nếu thay đổi kiến trúc, ghi vào nhật ký thực nghiệm.
+## 4.4 MLP – Tấn Lên huấn luyện, Trúc Chi trình bày
+Mạng fully-connected; **Tấn Lên (TV1) huấn luyện tại notebook 01**, các lớp ẩn tham khảo `(64,32)`, `alpha=0.001`, early stopping, `random_state=42`. Trúc Chi kiểm tra model/Validation bằng `split_id` và trình bày trong mục 4.4, không fit lại. Không mặc định MLP sẽ hơn RF trên dữ liệu bảng. Giải thích loss và ảnh hưởng scale/one-hot/overfit. Nếu thay đổi kiến trúc, ghi vào nhật ký thực nghiệm.
 
 ## 4.5 Chọn threshold và Top-K
 - Lấy xác suất `predict_proba(X_val)[:,1]`.
-- Chọn mô hình chính theo **Average Precision trên Validation** giữa RF Ngọc Lan và MLP Trúc Chi; Dummy là tham chiếu. Giữ ngưỡng RF do Ngọc Lan chốt trên Validation.
+- Chọn mô hình chính theo **Average Precision trên Validation** giữa RF Ngọc Lan và MLP Tấn Lên; Dummy là tham chiếu. Giữ ngưỡng RF/MLP do từng người chốt trên Validation.
 - Chọn threshold theo F1 Validation hoặc tiêu chí vận hành được **chốt trước**; ghi số FP và TP trên Validation.
 - Với Top-K, sắp xếp giảm dần theo nguy cơ; chọn K theo khả năng giám sát hoặc mô phỏng ngân sách.
 
@@ -39,3 +39,5 @@ Mạng fully-connected với hai lớp ẩn tham khảo `(64,32)`, `alpha=0.001`
 - File/ảnh config, bảng Validation và mô tả cách chạy.
 
 **Giới hạn:** Notebook khung chưa có số liệu thực nghiệm. Điều kiện hoàn thành là các cell chạy được trên Olist do Lam Linh bàn giao, có đầy đủ minh chứng và kết quả đối soát Ch5.
+
+**Quy ước TV4:** Trúc Chi chỉ gọi `fit` cho Dummy. Tài liệu 4.3 RF là kiểm chứng mô hình Ngọc Lan; 4.4 MLP là kiểm chứng mô hình Tấn Lên. Mục 4.5 tích hợp RF/MLP/Dummy và xuất frozen Test, không train mô hình ngoài Dummy.

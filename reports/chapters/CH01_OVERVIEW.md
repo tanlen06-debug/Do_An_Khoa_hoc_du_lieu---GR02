@@ -19,3 +19,5 @@
 *TODO:* Mục tiêu – phương pháp – bằng chứng (bảng/hình/nguồn) – nhận xét. Chỉ điền số liệu thực đã kiểm chứng.
 
 > Đồng bộ số liệu, tên biến và trích dẫn với phần triển khai / notebook liên quan trước khi tạo PR.
+
+**Ghi chú phân công liên chương:** Tấn Lên phụ trách thêm code huấn luyện MLP trong notebook 01 để bàn giao kết quả cho mục 4.4 Chương 4 (Trúc Chi viết báo cáo). Mục lục và nội dung Chương 1 không thay đổi.

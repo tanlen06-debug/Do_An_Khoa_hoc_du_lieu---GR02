@@ -48,3 +48,5 @@ Không tạo metric giả khi chưa nhận frozen Test predictions.
 
 ## Phân công mới: kiểm tra độc lập cả ba mô hình
 Vĩnh Chi không chỉ đọc file dự đoán có sẵn mà cần **nạp lại** các artifact RF từ Ngọc Lan, Dummy và MLP từ Trúc Chi. Xác minh `split_id`, thứ tự `order_id` và tính lại `predict_proba(X_test)` cho cả ba (không gọi fit). Đối soát với `test_predictions.csv`, sau đó tính lại P/R/F1/AP/FP, PR curve và Top-K trên **cùng frozen Test**. Không tự chọn ngưỡng hay K dựa trên Test.
+
+**Cập nhật 12/11:** chủ mô hình cố định là **RF–Ngọc Lan, Dummy–Trúc Chi, MLP–Tấn Lên**. Vĩnh Chi phải kiểm tra `tan_len_mlp.joblib` thay cho tên file MLP của Trúc Chi cũ, so khớp `split_id` và `predict_proba(Test)` trước khi báo metrics.

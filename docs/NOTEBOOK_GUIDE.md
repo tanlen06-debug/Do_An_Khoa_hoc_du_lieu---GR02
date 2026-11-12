@@ -31,11 +31,11 @@ Lấy dữ liệu gốc từ https://www.kaggle.com/datasets/olistbr/brazilian-e
 - **Trạng thái khởi tạo:** không notebook nào có số liệu thực nghiệm Olist; các cells chỉ trả kết quả sau khi chạy với dữ liệu gốc.
 
 ## Đảm bảo các thành viên không làm trùng
-- Tấn Lên: không chạy lại RF/MLP trong notebook Ch1/6 hoặc FINAL.
-- Ngọc Lan: trực tiếp huấn luyện RF trên Train chung và báo Precision/Recall/F1/AP/FP/Top-K Validation; bàn giao pipeline RF và metadata cho Trúc Chi.
+- Tấn Lên (TV1): **huấn luyện MLP tại notebook 01**, bàn giao artifact/Validation cho Ch4; FINAL không huấn luyện lại model. RF do Ngọc Lan, Dummy do Trúc Chi.
+- Ngọc Lan: trực tiếp huấn luyện Random Forest trên Train chung, đo P/R/F1/AP/FP/Top-K Validation và bàn giao RF artifact cho Trúc Chi.
 - Lam Linh: chịu trách nhiệm duy nhất trong việc định nghĩa nhãn và xuất bảng cấp đơn.
-- Trúc Chi: tạo split chung và train Dummy/MLP; tiếp nhận RF của Ngọc Lan, kiểm tra cùng split_id, chọn champion/ngưỡng trên Validation, xuất frozen Test; không fit lại RF.
-- Vĩnh Chi: không fit lại mô hình; tải cả 3 model, tự tính lại xác suất trên frozen Test rồi tính metrics và Top-K cho RF/Dummy/MLP.
+- Trúc Chi: tạo split chung và CHỈ train Dummy; tiếp nhận RF của Ngọc Lan và MLP của Tấn Lên, kiểm tra cùng split_id, chọn champion/ngưỡng trên Validation, xuất frozen Test; không fit lại RF/MLP.
+- Vĩnh Chi: không fit lại mô hình; tải RF Ngọc Lan, Dummy Trúc Chi, MLP Tấn Lên để kiểm tra lại xác suất frozen Test rồi tính metrics và Top-K.
 - FINAL: đọc, đối chiếu artifact và tổng hợp; không train lại sau khi biết Test.
 
 ## Tự tạo nhánh GitHub
@@ -57,4 +57,6 @@ git push -u origin feature/ten-thanh-vien-nhiem-vu
 Notebook có nhiều cell hướng dẫn **không có nghĩa nhiệm vụ đã hoàn thành**. Chỉ đánh dấu `Hoàn thành` ở Sheets khi có chạy thành công, minh chứng, review và bản báo cáo đúng mẫu.
 
 ## Thứ tự chạy mới: không trùng việc
-Ch3 Lam Linh → Ch4 Trúc Chi **tạo split chung** → Ch2 Ngọc Lan **RF trên Train/Validation** → Ch4 Trúc Chi **Dummy/MLP và tích hợp RF** → Ch5 Vĩnh Chi **đánh giá độc lập trên Test** → FINAL. Đọc [giao thức chung](EXPERIMENT_PROTOCOL.md).
+Ch3 Lam Linh → Ch4 Trúc Chi **tạo split chung** → Ch2 Ngọc Lan **RF**, notebook 01 Tấn Lên **MLP** (cùng Train/Validation) → Ch4 Trúc Chi **chỉ fit Dummy, tích hợp RF+MLP** → Ch5 Vĩnh Chi **đánh giá lại ba model trên Test** → FINAL. Đọc [giao thức chung](EXPERIMENT_PROTOCOL.md).
+
+**Notebook 01 đã thêm khối thực nghiệm MLP cho TV1:** artifact `tan_len_mlp.joblib`, `mlp_val_predictions.csv`, `mlp_metadata.json`. Mục 4.4 vẫn ở Ch4 và do Trúc Chi trình bày dựa trên sản phẩm của TV1.

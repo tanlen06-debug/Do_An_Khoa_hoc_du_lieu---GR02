@@ -49,3 +49,11 @@ Viết mục tiêu đo lường được bằng EDA, bảng metrics Test và dem
 - Kết luận dựa trên bảng Ch5 và hạn chế thật, không hứa hiệu quả chưa kiểm chứng.
 
 **Điều kiện nghiệm thu:** báo cáo Ch1 và Ch6 khớp dữ liệu, mô hình, kết quả; hình và bảng có chú thích; link notebook/PR có minh chứng.
+
+## MLP – Trách nhiệm bổ sung của Tấn Lên (TV1), sản phẩm cho mục 4.4 của Chương 4
+Tấn Lên **trực tiếp huấn luyện MLP** trong các cell thực nghiệm mới thuộc `notebooks/01_TAN_LEN_chuong_1_6.ipynb`, sử dụng `src.experiment.get_shared_splits` và `SAFE_FEATURES` do Trúc Chi thống nhất.
+
+- Pipeline: imputer, `StandardScaler` cho numeric, one-hot cho categorical, `MLPClassifier` với `early_stopping`.
+- Chọn `hidden_layer_sizes`/`alpha` bằng AP Validation, ngưỡng F1 Validation; trình bày training loss và P/R/F1/AP/FP/Top-K Validation.
+- Bàn giao `models/tan_len_mlp.joblib`, `data/processed/mlp_val_predictions.csv`, `mlp_metadata.json` cho Trúc Chi.
+- **Trúc Chi chỉ dùng kết quả TV1 để biên soạn mục 4.4**, không fit lại MLP. Vĩnh Chi độc lập kiểm tra Test cuối cùng. Tấn Lên vẫn chịu trách nhiệm Ch1/Ch6/FINAL, không thay đổi cấu trúc báo cáo.
