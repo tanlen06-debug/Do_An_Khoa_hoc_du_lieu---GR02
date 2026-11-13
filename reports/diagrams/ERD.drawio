@@ -316,7 +316,7 @@
         <mxCell id="107" value="" style="line;html=1;strokeWidth=0.6;movable=0;resizable=0;connectable=0;labelBackgroundColor=none;" parent="98" vertex="1">
           <mxGeometry x="1" y="142" width="278" as="geometry" />
         </mxCell>
-        <mxCell id="108" value="1 : N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=16;html=1;entryX=0;entryY=0.35;entryPerimeter=1;strokeWidth=1.7;endArrow=none;startArrow=none;fontFamily=Arial;fontSize=11;fontColor=default;labelBackgroundColor=none;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" target="14" edge="1">
+        <mxCell id="108" value="1 : 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=16;html=1;entryX=0;entryY=0.35;entryPerimeter=1;strokeWidth=1.7;endArrow=none;startArrow=none;fontFamily=Arial;fontSize=11;fontColor=default;labelBackgroundColor=none;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" target="14" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="310" y="273" as="sourcePoint" />
           </mxGeometry>

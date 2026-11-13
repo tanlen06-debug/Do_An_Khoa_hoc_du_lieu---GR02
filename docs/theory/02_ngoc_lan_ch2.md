@@ -54,3 +54,12 @@ Chọn 3–5 bài có thể kiểm chứng: tác giả, năm, link DOI/URL, dữ
 - [precision_recall_curve](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_curve.html)
 
 **Nghiệm thu:** mục 2.1–2.5 có định nghĩa + nguồn + giải thích có liên hệ bài toán; thuật toán/metric khớp Ch4–Ch5; không đưa kết quả Olist chưa chạy.
+
+## Thực nghiệm bắt buộc Ngọc Lan – phần 2.3 và 2.4
+Bên cạnh lý thuyết 2.1–2.5, Ngọc Lan **trực tiếp huấn luyện Random Forest** theo các cell thực nghiệm trong `02_NGOC_LAN_chuong_2.ipynb`. Dữ liệu đầu vào là `orders_model_ready.csv` từ Ch3; split chung do `src/experiment.py` tạo và Trúc Chi quản lý, có cùng `split_id`.
+
+1. Chọn cấu hình RF bằng **AP Validation**, fit pipeline chỉ trên Train.
+2. Tính Precision, Recall, F1, AP (quy ước PR-AUC), TP, FP, FN, TN, Precision@K và Recall@K cho **RF Validation**.
+3. Bàn giao `models/ngoc_lan_random_forest.joblib`, `rf_val_predictions.csv`, `rf_metadata.json` cho Trúc Chi trước 20/11.
+4. **Không xem Test** khi lựa chọn RF, không huấn luyện Dummy/MLP ở notebook Ngọc Lan.
+5. Vĩnh Chi chịu trách nhiệm **đánh giá độc lập trên Test**; tránh báo nhầm metric Validation thành metric Test.

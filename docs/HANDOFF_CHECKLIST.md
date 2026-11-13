@@ -1,40 +1,34 @@
-# CHECKLIST BÀN GIAO 5 THÀNH VIÊN → NOTEBOOK FINAL
+# Checklist bàn giao GR02 – MLP chuyển về TV1, TV4 chỉ Dummy
 
-## Tấn Lên – Chương 1, 6 và phụ lục
-- [ ] Ch1 có lý do chọn đề tài, bài toán dự đoán tại approved_at, mục tiêu và giới hạn.
-- [ ] Ch6 có sơ đồ dashboard, kiểm thử, README, demo/hình chụp khi đủ model.
-- [ ] `01_TAN_LEN_chuong_1_6.ipynb` và Markdown lý thuyết được cập nhật đúng.
-- [ ] Chỉ dùng chỉ số của Ch5 để viết kết luận; không tự tạo số liệu.
+## Lam Linh (Ch3) → Trúc Chi
+- [ ] Tạo `orders_model_ready.csv` với `order_id` duy nhất, nhãn đúng, feature whitelist tại approved_at và EDA/QA rõ ràng.
+- [ ] Bàn giao schema, dataset fingerprint, báo cáo giới hạn delivered-only.
 
-## Ngọc Lan – Chương 2
-- [ ] `02_NGOC_LAN_chuong_2.ipynb`, `docs/theory/02_ngoc_lan_ch2.md`.
-- [ ] Có logistics, EDA, Random Forest, MLP, Dummy, P/R/F1/AP/Top-K.
-- [ ] Có bảng 3–5 nghiên cứu liên quan **đã kiểm chứng nguồn**; đối chiếu với Ch4/Ch5.
+## Trúc Chi (4.1) → Ngọc Lan và Tấn Lên
+- [ ] Chốt shared split/cutoff/label maturity; có `split_manifest.csv`, `split_metadata.json`, `split_id`.
+- [ ] Hai thành viên RF/MLP dùng đúng dữ liệu, nhãn và whitelist, không tự chia lại.
 
-## Lam Linh – Chương 3 → Trúc Chi
-- [ ] `03_LAM_LINH_chuong_3.ipynb` chạy được trên Olist đã tải.
-- [ ] 1 dòng/order_id, nhãn theo ngày, có số mẫu bị loại, EDA kèm insight.
-- [ ] Có `orders_model_ready.csv`, dữ liệu dictionary, feature whitelist; audit leakage tại approved_at.
-- [ ] Trúc Chi xác nhận schema và dataset đã nhận (mốc 12–16/11).
+## Ngọc Lan (Ch2.3/2.4) → Trúc Chi
+- [ ] Huấn luyện Random Forest trên Train chung; chọn tham số/ngưỡng trên Validation.
+- [ ] Bàn giao `ngoc_lan_random_forest.joblib`, `rf_val_predictions.csv`, `rf_metadata.json` có split_id, Validation metrics/Top-K và nguồn lý thuyết.
 
-## Trúc Chi – Chương 4 → Vĩnh Chi
-- [ ] `04_TRUC_CHI_chuong_4.ipynb` chạy được sau Ch3.
-- [ ] Train/Val/Test theo thời gian; imputer/encoder/scaler fit Train-only.
-- [ ] Dummy, RF, MLP; chọn model/ngưỡng theo Validation, Test đóng băng.
-- [ ] Có `test_predictions.csv`, `experiment_metadata.json`, `models/champion.joblib`.
-- [ ] Vĩnh Chi xác nhận bản giao đến 22–24/11.
+## Tấn Lên (TV1 – huấn luyện MLP cho 4.4) → Trúc Chi
+- [ ] Notebook 01 có cell fit MLP trên Train, Pipeline impute/encode/scale, thử kiến trúc, early-stopping và loss.
+- [ ] Có Precision/Recall/F1/AP/FP/Top-K Validation, threshold từ Validation; không dùng Test.
+- [ ] Bàn giao `tan_len_mlp.joblib`, `mlp_val_predictions.csv`, `mlp_metadata.json` có split_id và config, trước 21/11.
+- [ ] Tấn Lên vẫn phụ trách Ch1, Ch6, dashboard và FINAL; Trúc Chi trình bày kết quả MLP tại **mục 4.4 của Ch4**.
 
-## Vĩnh Chi – Chương 5 → Tấn Lên
-- [ ] `05_VINH_CHI_chuong_5.ipynb` chỉ đọc frozen Test; không fit mô hình.
-- [ ] Metrics P/R/F1/AP/FP, confusion matrix, PR Curve, Precision@K/Recall@K.
-- [ ] Có `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png`.
-- [ ] Tấn Lên nhận và đối chiếu số liệu 24–25/11.
+## Trúc Chi (TV4 – Ch4) → Vĩnh Chi
+- [ ] TV4 **chỉ fit Dummy**, không fit RF hoặc MLP.
+- [ ] Kiểm tra RF Ngọc Lan + MLP Tấn Lên: model owner, split_id, dataset SHA256, features và Validation `order_id,y_true,probabilities`.
+- [ ] Tổng hợp bảng AP Validation; đóng băng champion/threshold trước Test.
+- [ ] Bàn giao `dummy_truc_chi.joblib`, `champion.joblib`, `test_predictions.csv`, `experiment_metadata.json` và toàn bộ artifact RF/MLP từ hai thành viên.
 
-## Cả nhóm – 06_FINAL
-- [ ] Chạy tuần tự Ch3 → Ch4 → Ch5 → FINAL; notebooks Ch1/2 được rà soát và cập nhật.
-- [ ] FINAL khớp schema, số đơn, nhãn, cutoff, threshold, metric và mô hình.
-- [ ] Ch1–Ch6 + phụ lục, hình/bảng, trích dẫn và README khớp code.
-- [ ] Dashboard Streamlit chạy offline, minh họa đúng phạm vi nghiên cứu.
-- [ ] 27/11 bản đầy đủ; 28–29/11 review; hoàn tất nội bộ 30/11/2026.
+## Vĩnh Chi (TV5 – Ch5) → Tấn Lên
+- [ ] Nạp RF Ngọc Lan, Dummy Trúc Chi, MLP Tấn Lên; tính lại xác suất trên một frozen Test, đối chiếu Ch4.
+- [ ] Tính lại P/R/F1/AP/FP, confusion matrix, PR Curve, Precision@K/Recall@K/FP@K của ba mô hình. Không fit hoặc tune Test.
+- [ ] Bàn giao `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png` và thảo luận lỗi/hạn chế.
 
-Các file CSV/model nội bộ được `.gitignore`. Đừng đánh dấu hoàn thành chỉ vì notebook có sẵn khung.
+## FINAL
+- [ ] Đối chiếu model_owners: RF–Ngọc Lan, MLP–Tấn Lên, Dummy–Trúc Chi; split_id chung và chỉ số Test của Vĩnh Chi.
+- [ ] Đủ 6 chương, 27 hạng mục, phụ lục và dashboard; hạn cuối 30/11/2026; không giả lập số thực nghiệm.

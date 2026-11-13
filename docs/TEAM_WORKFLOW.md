@@ -32,11 +32,13 @@ git push -u origin feature/lam-linh-ch03-data
 Đừng sửa cùng lúc notebook của người khác trên nhiều nhánh. Mọi thay đổi vào `src/` hoặc hợp đồng dữ liệu cần được owner liên quan review trước khi merge.
 
 ## Trình tự & bàn giao
-Lam Linh Ch3 → Trúc Chi Ch4 → Vĩnh Chi Ch5 → Tấn Lên Ch6/FINAL. Ngọc Lan tổng quan lý thuyết song song, kiểm tra thuật toán và chỉ số có trùng với kết quả thật hay không.
+Lam Linh Ch3 → Trúc Chi chốt split → Ngọc Lan train RF/Validation và Tấn Lên train MLP/Validation ở notebook 01 → Trúc Chi **chỉ train Dummy**, nạp RF/MLP, xuất Test → Vĩnh Chi đánh giá lại 3 model trên Test → Tấn Lên FINAL.
 
 - Ch3: `data/processed/orders_model_ready.csv`; schema, nhãn, QA, feature whitelist.
-- Ch4: `test_predictions.csv`, `experiment_metadata.json`, `models/champion.joblib`; threshold được chọn trên Validation.
-- Ch5: `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png`.
+- Ch2 (Ngọc Lan): `rf_val_predictions.csv`, `rf_metadata.json`, `models/ngoc_lan_random_forest.joblib`, chung split_id.
+- TV1 (Tấn Lên): `models/tan_len_mlp.joblib`, `mlp_val_predictions.csv`, `mlp_metadata.json` (MLP Validation, chung split_id).
+- Ch4 (Trúc Chi): `test_predictions.csv`, `experiment_metadata.json`, `models/dummy_truc_chi.joblib`, `models/champion.joblib`; tích hợp RF/MLP artifact gốc, chọn threshold/champion trên Validation.
+- Ch5 (Vĩnh Chi): độc lập kiểm tra Test predictions từ 3 fitted model rồi xuất `model_metrics.csv`, `topk_analysis.csv`, `pr_curve_test.png`.
 - Ch6/FINAL: kiểm tra file, áp dụng model đã review và tổng hợp báo cáo. **Không dùng Test để lựa chọn mô hình.**
 
 ## Tiêu chí PR
