@@ -21,3 +21,5 @@ Nhánh `main` đã có 9 tệp được theo dõi bằng Git LFS. Nếu máy đ�
 Sau khi có đủ dữ liệu, cài phụ thuộc bằng `python -m pip install -r requirements.txt` và chạy từ đầu [notebook Chương 3](../notebooks/03_LAM_LINH_chuong_3.ipynb). Notebook lưu dữ liệu cấp đơn ở `data/processed/`. Đối chiếu tên, dung lượng và SHA256 của 9 tệp gốc với [source_manifest.csv](../reports/tables/source_manifest.csv).
 
 Khi bàn giao cho Chương 4, dùng `orders_model_ready.csv`, `data_manifest.json` và `feature_whitelist.json` để kiểm tra dữ liệu. `orders_baseline_input.csv` chứa khóa, nhãn và 5 đặc trưng. `orders_split_metadata.csv` chứa các mốc thời gian phục vụ chia tập. Notebook 04 hiện đọc `orders_model_ready.csv` và chỉ chọn 5 cột trong danh sách đặc trưng. Chia sẻ gói dữ liệu đã xử lý qua kênh nội bộ của nhóm.
+
+Notebook 03 ghi các tệp CSV bàn giao bằng UTF-8 với dấu xuống dòng LF để mã SHA256 nhất quán trên Windows và Linux khi chạy cùng phiên bản thư viện. Để kiểm tra dữ liệu nhận được, đối chiếu mã băm của tệp với trường `model_sha256` trong `data_manifest.json`. Dùng nguyên tệp CSV đã xuất khi chạy notebook 04 vì thao tác lưu lại trong Excel có thể đổi định dạng và mã băm.
