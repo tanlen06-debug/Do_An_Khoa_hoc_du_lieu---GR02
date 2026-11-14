@@ -2,11 +2,11 @@ feature,dtype,missing,role,source,meaning,use_in_X,feature_policy,present_in_exp
 order_id,string,0.0,metadata,orders,"Khóa đối soát, không làm X",False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
 customer_id,string,0.0,metadata,orders/customers,"Khóa liên kết, không làm X",False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
 order_status,string,0.0,forbidden_feature,orders,Trạng thái cuối dùng chọn mẫu,False,not_in_baseline,True,Sau duyệt theo nghiệp vụ hoặc ghi nhận ở cuối vòng đời
-order_purchase_timestamp,datetime64[ns],0.0,metadata,orders,Nguồn tạo các feature thời gian,False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
-order_approved_at,datetime64[ns],0.0,metadata,orders,Mốc t0 và chia tập thời gian,False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
-order_delivered_carrier_date,datetime64[ns],1.0,forbidden_feature,orders,Mốc sau phê duyệt,False,not_in_baseline,True,Sau duyệt theo nghiệp vụ hoặc ghi nhận ở cuối vòng đời
-order_delivered_customer_date,datetime64[ns],0.0,forbidden_feature,orders,Chỉ tạo nhãn và kiểm tra nhãn đủ chín,False,not_in_baseline,True,Sau duyệt theo nghiệp vụ hoặc ghi nhận ở cuối vòng đời
-order_estimated_delivery_date,datetime64[ns],0.0,excluded_unverified,orders,Dùng tạo nhãn; nếu làm feature phải chứng minh có tại t0,False,not_in_baseline,True,Chưa có log xác nhận sẵn có ở lúc duyệt
+order_purchase_timestamp,datetime64[us],0.0,metadata,orders,Nguồn tạo các feature thời gian,False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
+order_approved_at,datetime64[us],0.0,metadata,orders,Mốc t0 và chia tập thời gian,False,not_in_baseline,True,Mốc ghi nhận trong quá trình đặt hoặc duyệt đơn
+order_delivered_carrier_date,datetime64[us],1.0,forbidden_feature,orders,Mốc sau phê duyệt,False,not_in_baseline,True,Sau duyệt theo nghiệp vụ hoặc ghi nhận ở cuối vòng đời
+order_delivered_customer_date,datetime64[us],0.0,forbidden_feature,orders,Chỉ tạo nhãn và kiểm tra nhãn đủ chín,False,not_in_baseline,True,Sau duyệt theo nghiệp vụ hoặc ghi nhận ở cuối vòng đời
+order_estimated_delivery_date,datetime64[us],0.0,excluded_unverified,orders,Dùng tạo nhãn; nếu làm feature phải chứng minh có tại t0,False,not_in_baseline,True,Chưa có log xác nhận sẵn có ở lúc duyệt
 qa_unknown_status,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True,Khi kiểm tra dữ liệu; một số cờ cần thông tin sau duyệt
 qa_approved_before_purchase,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True,Khi kiểm tra dữ liệu; một số cờ cần thông tin sau duyệt
 qa_carrier_before_approved,bool,0.0,qa_metadata,orders,"Cờ QA; có thể dùng thời gian tương lai, không làm X",False,not_in_baseline,True,Khi kiểm tra dữ liệu; một số cờ cần thông tin sau duyệt
