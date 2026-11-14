@@ -1,0 +1,7 @@
+child,key,parent,missing_key,orphan_rows
+orders,customer_id,customers,0,0
+items,order_id,orders,0,0
+items,product_id,products,0,0
+items,seller_id,sellers,0,0
+payments,order_id,orders,0,0
+reviews,order_id,orders,0,0

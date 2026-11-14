@@ -4,7 +4,7 @@
 
 **Nguồn dữ liệu:** [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), Brazil 2016–2018. **Hạn hoàn tất nội bộ:** 30/11/2026.
 
-**Trạng thái:** Bộ khung gồm **5 notebook cá nhân + 1 notebook FINAL**, tài liệu lý thuyết Markdown, kiểm tra dữ liệu, notebook mô hình và đánh giá. Chưa có dữ liệu hoặc điểm số thực nghiệm Olist cho tới khi nhóm chạy thực tế.
+**Trạng thái:** Repository gồm **5 notebook cá nhân + 1 notebook FINAL**, tài liệu lý thuyết Markdown và kiểm thử. [Chương 3](reports/chapters/CH03_DATA.md) trình bày kết quả làm sạch và phân tích dữ liệu Olist.
 
 ## Phân công và notebook
 
@@ -50,7 +50,7 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Tải 9 tệp CSV vào `data/raw/` theo [data/README.md](data/README.md). Dữ liệu raw/processed, `joblib` và secrets không được push.
+Tải 9 tệp CSV từ Kaggle vào `data/raw/` hoặc lấy bản được lưu bằng Git LFS theo [hướng dẫn dữ liệu](data/README.md). Dữ liệu trong `data/processed/` và các tệp mô hình được bàn giao nội bộ.
 
 ## Thống nhất chuyên môn
 

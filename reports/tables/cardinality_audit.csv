@@ -1,0 +1,5 @@
+quan_he,khoa,cap_du_lieu,so_khoa_con_lap
+customers → orders,customer_id,1:1 quan sát trong bộ dữ liệu,0
+orders → items,order_id,1:N,13984
+orders → payments,order_id,1:N,4446
+orders → reviews,order_id,1:N,551
