@@ -1,0 +1,20 @@
+{
+  "split_id": "72c64fdd7b6de725a531",
+  "dataset_sha256": "c23d4c4d9fdcab86b73659a0273d676277a90a2dd077cbb079570d8b7673de7f",
+  "features": [
+    "purchase_month_number",
+    "purchase_weekday",
+    "purchase_hour",
+    "approval_delay_hours",
+    "customer_state"
+  ],
+  "validation_start": "2018-04-16T09:31:24",
+  "test_start": "2018-06-21T12:41:03",
+  "n_train": 64416,
+  "n_validation": 12551,
+  "n_test": 14469,
+  "train_late_rate": 0.0681197218082464,
+  "val_late_rate": 0.04294478527607362,
+  "excluded_train": 3103,
+  "excluded_validation": 1917
+}
