@@ -21,7 +21,7 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Lấy dữ liệu gốc từ https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce vào `data/raw/`; 9 CSV không được commit. Các notebook tìm repo root qua `docs/DATA_CONTRACT.md`; mở từ repo root hoặc thư mục `notebooks/`.
+Lấy 9 CSV gốc tại `data/raw/` bằng `git lfs pull` (nhánh `main` theo dõi bằng Git LFS), hoặc tải trực tiếp từ https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce. Các notebook tìm repo root qua `docs/DATA_CONTRACT.md`; mở từ repo root hoặc thư mục `notebooks/`.
 
 ## Hướng dẫn viết từng cell
 - **Markdown (trước code):** mục đích, giả định, đầu vào/đầu ra, ý nghĩa lý thuyết, cảnh báo leakage.
@@ -29,6 +29,14 @@ Lấy dữ liệu gốc từ https://www.kaggle.com/datasets/olistbr/brazilian-e
 - **Markdown (sau code):** số mẫu, KPI, insight có dữ liệu minh chứng, giới hạn, kết luận nhỏ.
 - Mỗi biểu đồ/bảng nên có tên, trục/đơn vị, cỡ mẫu và vị trí trích dẫn trong báo cáo.
 - **Trạng thái khởi tạo:** không notebook nào có số liệu thực nghiệm Olist; các cells chỉ trả kết quả sau khi chạy với dữ liệu gốc.
+
+## Quy định lưu output notebook trên GitHub
+- **Được phép commit notebook `.ipynb` đã chạy**, bao gồm `execution_count` và các output dạng bảng, văn bản, hình/biểu đồ minh chứng cho dữ liệu thật. Notebook chưa chạy (output rỗng) vẫn hợp lệ.
+- Chỉ commit kết quả **thực sự được tạo từ code và dữ liệu hợp lệ**, không sửa số liệu thủ công hoặc tạo output giả. Ghi phiên bản dataset, seed và cách chạy để nhóm có thể tái lập.
+- Không commit output chứa thông tin cá nhân, đường dẫn riêng tư, secret, dữ liệu gốc/processed toàn bộ, hoặc hình/output quá lớn; chỉ giữ bảng tóm tắt và biểu đồ cần thiết. CSV và mô hình lớn trao đổi theo kênh bàn giao riêng.
+- Không commit output lỗi/traceback. Nếu chạy lại phát sinh lỗi, sửa code, chạy lại và xác minh trước khi tạo PR.
+- `python -m pytest -q` kiểm tra cú pháp Python, cấu trúc output, và từ chối `output_type = error`. CI **không chạy lại toàn bộ notebook bằng 9 CSV**, nên nhóm trưởng và người nhận vẫn cần review kết quả thật và kiểm tra tái lập.
+- Lưu ý notebook có output ảnh sẽ làm Git diff và kích thước repository lớn hơn; ưu tiên minh chứng gọn và liên kết tới `reports/figures/` khi phù hợp.
 
 ## Đảm bảo các thành viên không làm trùng
 - Tấn Lên (TV1): **huấn luyện MLP tại notebook 01**, bàn giao artifact/Validation cho Ch4; FINAL không huấn luyện lại model. RF do Ngọc Lan, Dummy do Trúc Chi.
