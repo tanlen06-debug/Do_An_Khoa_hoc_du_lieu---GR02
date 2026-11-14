@@ -15,7 +15,6 @@
   "n_test": 14469,
   "train_late_rate": 0.0681197218082464,
   "val_late_rate": 0.04294478527607362,
-  "test_late_rate": 0.042781118252816365,
   "excluded_train": 3103,
   "excluded_validation": 1917
 }
