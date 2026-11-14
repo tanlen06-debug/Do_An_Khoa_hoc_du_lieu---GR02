@@ -1,0 +1,9 @@
+﻿table,check,affected_rows,note
+orders,missing_order_id,0,Khóa đơn hàng không được thiếu
+orders,duplicate_order_id,0,order_id phải duy nhất trong bảng orders
+items,negative_price,0,Giá sản phẩm âm là bất thường
+items,negative_freight,0,Phí vận chuyển âm là bất thường
+items,duplicate_item_key,0,Cặp order_id và order_item_id phải duy nhất
+reviews,invalid_review_score,0,Điểm đánh giá hợp lệ từ 1 đến 5
+payments,negative_payment,0,Giá trị thanh toán âm là bất thường
+payments,duplicate_payment_key,0,Khóa ghép thanh toán phải duy nhất

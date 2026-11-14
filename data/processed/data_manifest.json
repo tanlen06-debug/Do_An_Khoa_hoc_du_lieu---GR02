@@ -1,0 +1,89 @@
+{
+  "notebook_version": "lam_linh_ch03_20261113",
+  "source_files": [
+    {
+      "table": "orders",
+      "file": "olist_orders_dataset.csv",
+      "bytes": 17654914,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+    },
+    {
+      "table": "items",
+      "file": "olist_order_items_dataset.csv",
+      "bytes": 15438671,
+      "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279"
+    },
+    {
+      "table": "customers",
+      "file": "olist_customers_dataset.csv",
+      "bytes": 9033957,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+    },
+    {
+      "table": "sellers",
+      "file": "olist_sellers_dataset.csv",
+      "bytes": 174703,
+      "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e"
+    },
+    {
+      "table": "products",
+      "file": "olist_products_dataset.csv",
+      "bytes": 2379446,
+      "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc"
+    },
+    {
+      "table": "payments",
+      "file": "olist_order_payments_dataset.csv",
+      "bytes": 5777138,
+      "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0"
+    },
+    {
+      "table": "reviews",
+      "file": "olist_order_reviews_dataset.csv",
+      "bytes": 14451670,
+      "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7"
+    },
+    {
+      "table": "geolocation",
+      "file": "olist_geolocation_dataset.csv",
+      "bytes": 61273883,
+      "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6"
+    },
+    {
+      "table": "translation",
+      "file": "product_category_name_translation.csv",
+      "bytes": 2613,
+      "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+    }
+  ],
+  "generated_at_utc": "2026-11-14T03:32:25.933153+00:00",
+  "model_file": "orders_model_ready.csv",
+  "model_sha256": "c23d4c4d9fdcab86b73659a0273d676277a90a2dd077cbb079570d8b7673de7f",
+  "outputs_sha256": {
+    "orders_model_ready.csv": "c23d4c4d9fdcab86b73659a0273d676277a90a2dd077cbb079570d8b7673de7f",
+    "orders_baseline_input.csv": "724fa2dca79eb546b7a7d37a8bb6a76e7cf3a0bfdf83493b9f295e25c2c9e7d9",
+    "orders_split_metadata.csv": "51f526235df006ec010166b49ce8c0ad0e53761ef1269ae998664605766744b5",
+    "feature_whitelist.json": "d50bf30ffa28e80701741e541670df84bdfca74c4d701a2cf90e43acddb6730a"
+  },
+  "rows": 96456,
+  "columns": 37,
+  "late_orders": 6534,
+  "late_rate": 0.06774073152525503,
+  "features": [
+    "purchase_month_number",
+    "purchase_weekday",
+    "purchase_hour",
+    "approval_delay_hours",
+    "customer_state"
+  ],
+  "baseline_file": "orders_baseline_input.csv",
+  "feature_policy": "five_baseline_features_only",
+  "label": "DATE(actual)>DATE(estimated), delivered with approved+actual+estimated",
+  "chronology_policy": "retain flagged rows in labeled cohort; provide chronology sensitivity; flags excluded from X",
+  "versions": {
+    "python": "3.12.2",
+    "pandas": "2.3.3",
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2"
+  }
+}
