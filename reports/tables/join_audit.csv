@@ -1,0 +1,8 @@
+metric,count
+orders_before_join,99441
+orders_after_customers,99441
+orders_after_items,99441
+orders_after_join,99441
+orders_without_items,775
+orders_without_payment,1
+orders_with_multiple_sellers,1278
