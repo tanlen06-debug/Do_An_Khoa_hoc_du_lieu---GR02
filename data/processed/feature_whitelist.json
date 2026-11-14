@@ -1,0 +1,7 @@
+[
+  "purchase_month_number",
+  "purchase_weekday",
+  "purchase_hour",
+  "approval_delay_hours",
+  "customer_state"
+]
