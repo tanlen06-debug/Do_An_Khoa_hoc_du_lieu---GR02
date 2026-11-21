@@ -35,7 +35,7 @@ Quay lại [Chương 3](CH03_DATA.md).
 
 | Chỉ tiêu | Trước | Sau | Chênh lệch |
 | --- | --- | --- | --- |
-| total_price | 13591643.7 | 13591643.7 | -0.0 |
+| total_price | 13591643.7 | 13591643.7 | 0.0 |
 | total_freight | 2251909.54 | 2251909.54 | 0.0 |
 | total_payment | 16008872.12 | 16008872.12 | 0.0 |
 | item_count | 112650.0 | 112650.0 | 0.0 |

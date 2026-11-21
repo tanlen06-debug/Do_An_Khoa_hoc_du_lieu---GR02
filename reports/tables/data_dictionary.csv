@@ -2,16 +2,16 @@ table,column,meaning,clean_dtype,part_of_checked_key,missing_after
 orders,order_id,Mã đơn hàng,string,True,0
 orders,customer_id,Mã bản ghi khách hàng liên kết đơn,string,False,0
 orders,order_status,Trạng thái cuối quan sát,string,False,0
-orders,order_purchase_timestamp,Thời điểm đặt đơn,datetime64[ns],False,0
-orders,order_approved_at,"Thời điểm phê duyệt, t0 dự báo",datetime64[ns],False,160
-orders,order_delivered_carrier_date,"Thời điểm bàn giao vận chuyển, hậu nghiệm",datetime64[ns],False,1783
-orders,order_delivered_customer_date,"Thời điểm giao khách, dùng tạo nhãn",datetime64[ns],False,2965
-orders,order_estimated_delivery_date,"Ngày giao dự kiến, dùng tạo nhãn; feature cần xác minh",datetime64[ns],False,0
+orders,order_purchase_timestamp,Thời điểm đặt đơn,datetime64[us],False,0
+orders,order_approved_at,"Thời điểm phê duyệt, t0 dự báo",datetime64[us],False,160
+orders,order_delivered_carrier_date,"Thời điểm bàn giao vận chuyển, hậu nghiệm",datetime64[us],False,1783
+orders,order_delivered_customer_date,"Thời điểm giao khách, dùng tạo nhãn",datetime64[us],False,2965
+orders,order_estimated_delivery_date,"Ngày giao dự kiến, dùng tạo nhãn; feature cần xác minh",datetime64[us],False,0
 items,order_id,Mã đơn hàng,string,True,0
 items,order_item_id,Số thứ tự item trong đơn,int64,True,0
 items,product_id,Mã sản phẩm,string,False,0
 items,seller_id,Mã người bán,string,False,0
-items,shipping_limit_date,"Hạn bàn giao vận chuyển, cần xác minh tại t0",datetime64[ns],False,0
+items,shipping_limit_date,"Hạn bàn giao vận chuyển, cần xác minh tại t0",datetime64[us],False,0
 items,price,"Giá item, BRL",float64,False,0
 items,freight_value,"Phí vận chuyển item, BRL",float64,False,0
 customers,customer_id,Mã bản ghi khách hàng liên kết đơn,string,True,0
@@ -42,8 +42,8 @@ reviews,order_id,Mã đơn hàng,string,True,0
 reviews,review_score,Điểm đánh giá 1–5,int64,False,0
 reviews,review_comment_title,"Tiêu đề tùy chọn, thiếu có thể hợp lệ",string,False,87658
 reviews,review_comment_message,"Nội dung tùy chọn, thiếu có thể hợp lệ",string,False,58274
-reviews,review_creation_date,Ngày tạo đánh giá,datetime64[ns],False,0
-reviews,review_answer_timestamp,Thời điểm trả lời đánh giá,datetime64[ns],False,0
+reviews,review_creation_date,Ngày tạo đánh giá,datetime64[us],False,0
+reviews,review_answer_timestamp,Thời điểm trả lời đánh giá,datetime64[us],False,0
 geolocation,geolocation_zip_code_prefix,"Tiền tố mã bưu chính, chuỗi 5 chữ số",string,False,0
 geolocation,geolocation_lat,Vĩ độ,float64,False,0
 geolocation,geolocation_lng,Kinh độ,float64,False,0
