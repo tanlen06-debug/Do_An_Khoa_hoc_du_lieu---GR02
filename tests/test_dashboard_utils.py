@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import pytest
+from sklearn.impute import SimpleImputer
 
 from app.dashboard_utils import (
     BASELINE_FEATURES, eda_by_month, eda_by_state, eda_by_value, eda_kpis,
@@ -103,6 +104,17 @@ def test_scoring_only_uses_whitelisted_columns_and_validates_ranges():
     bad.loc[0, "purchase_hour"] = "broken"
     with pytest.raises(ValueError, match="không phải số"):
         scoring_features(bad, BASELINE_FEATURES.copy())
+
+
+def test_missing_customer_states_reach_the_categorical_imputer():
+    source = example_data()
+    source.loc[0, "customer_state"] = pd.NA
+    source.loc[1, "customer_state"] = "  "
+
+    features = scoring_features(source, BASELINE_FEATURES.copy())
+    imputed = SimpleImputer(strategy="most_frequent").fit_transform(features[["customer_state"]])
+
+    assert imputed[:, 0].tolist() == ["RJ", "RJ", "RJ", "RJ"]
 
 
 def test_topk_ranking_ties_and_label_leakage():
