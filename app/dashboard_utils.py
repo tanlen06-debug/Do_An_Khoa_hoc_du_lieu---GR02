@@ -170,8 +170,10 @@ def scoring_features(source: pd.DataFrame, whitelist: list[str]) -> pd.DataFrame
             raise ValueError(f"{col} nằm ngoài [{lower}, {upper}]")
     if x["approval_delay_hours"].dropna().lt(0).any():
         raise ValueError("approval_delay_hours không được âm")
-    x["customer_state"] = x["customer_state"].astype("string")
-    x.loc[x["customer_state"].str.strip() == "", "customer_state"] = pd.NA
+    state = x["customer_state"].astype("string")
+    state = state.mask(state.str.strip().eq(""))
+    # The fitted categorical imputer expects NumPy NaN as its missing marker.
+    x["customer_state"] = state.to_numpy(dtype=object, na_value=np.nan)
     if x.isna().all(axis=1).any():
         raise ValueError("Có đơn không có bất kỳ đặc trưng hợp lệ nào")
     return x
